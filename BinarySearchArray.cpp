@@ -23,7 +23,23 @@ int BinarySearch(struct Array arr,int key){
     }
     return -1;
 }
+int RBSearch(int A[],int l,int h,int key)
+{
+    int mid;
+    if(l <= h){
+        mid = (l+h)/2;
+        if(A[mid] == key)
+            return mid;
+        else if(key < A[mid])
+            return RBSearch(A,l,mid-1,key);
+        else
+            return RBSearch(A,mid+1,h,key);
+
+    }
+    return -1;
+}
 int main(){
     struct Array arr={{5,8,9,12,16,19,23,28,32,43},10,10};
-    printf("%d\n",BinarySearch(arr,43));
+    printf("%d\n",BinarySearch(arr,19));
+    printf("%d\n",RBSearch(arr.A,0,arr.length,12));
 }
