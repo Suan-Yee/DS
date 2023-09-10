@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <iostream>
+#include <stdlib.h>
 
 struct Array
 {
@@ -7,6 +7,12 @@ struct Array
     int length;
     int size;
 };
+void swap(int *x,int *y){
+    int temp;
+    temp = *x;
+    *x = *y;
+    *y = temp;
+}
 void display(struct Array arr)
 {
     int x;
@@ -69,14 +75,37 @@ float Avg(struct Array arr)
 {
     return (float)Sum(arr) / arr.length;
 }
+void Reverse(struct Array *arr)
+{
+    int *B;
+    int x,j;
+
+    B= (int *)malloc(arr->length*sizeof(int));
+
+    for(x = arr->length-1,j=0; x >=0 ; x--,j++)
+    B[j] = arr->A[x];
+    for(x = 0; x < arr->length ; x++){
+        arr->A[x] = B[x];
+    }
+
+}
+void Reverse2(struct Array *arr)
+{
+    int i,j;
+    for(i=arr->length-1,j=0; j > i ; j++,i--)
+    {
+        swap(&arr->A[j],&arr->A[i]);
+    }
+}
 int main()
 {
 
     struct Array arr = {{1, 4, 6, 3, 8}, 5, 20};
-    printf("%d\n", Get(arr, 2));
+    //printf("%d\n", Get(arr, 2));
     // Set(&arr,2,9);
-    printf("%d\n", Max(arr));
-    printf("%d\n", Sum(arr));
+    //printf("%d\n", Max(arr));
+    //printf("%d\n", Sum(arr));
+    Reverse(&arr);
     display(arr);
 
     return 0;
