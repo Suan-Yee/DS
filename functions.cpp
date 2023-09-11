@@ -97,15 +97,51 @@ void Reverse2(struct Array *arr)
         swap(&arr->A[j],&arr->A[i]);
     }
 }
+void Leftshift(struct Array *arr)
+{
+    int i,temp;
+    
+        temp = arr->A[0];
+        for(i = 1; i < arr->length; i++){
+            arr->A[i-1] = arr->A[i];
+        }
+        arr->A[arr->length-1]= temp;  
+}
+void InsertSort(struct Array *arr,int x)
+{
+    int i = arr->length-1;
+    if(arr->length == arr->size)
+        return;
+    while(i>=0 && arr->A[i] > x)
+    {
+        arr->A[i+1] = arr->A[i];
+        i--;
+    }
+    arr->A[i+1] = x;
+    arr->length++;
+
+}
+int isSorted(struct Array arr)
+{
+    int i;
+    for(i = 0 ; i < arr.length-1 ; i++)
+    {
+        if(arr.A[i] > arr.A[i+1])
+            return 0;
+    }
+    return 1;
+}
 int main()
 {
 
-    struct Array arr = {{1, 4, 6, 3, 8}, 5, 20};
+    struct Array arr = {{1, 4, 6, 7, 8}, 5, 20};
     //printf("%d\n", Get(arr, 2));
     // Set(&arr,2,9);
     //printf("%d\n", Max(arr));
     //printf("%d\n", Sum(arr));
-    Reverse(&arr);
+    //Reverse(&arr);
+    printf("%d\n",isSorted(arr));
+    Leftshift(&arr);
     display(arr);
 
     return 0;
